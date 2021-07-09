@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+var cors = require("cors");
 
 const router = require("./routes/pages");
 const routerApi = require("./routes/products");
@@ -7,6 +8,9 @@ require("./utils/db"); // Lanza la BBDD mongoose
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(cors());
+
 // Motor de vistas
 app.set("view engine", "pug");
 app.set("views", "./views");
