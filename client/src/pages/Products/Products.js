@@ -17,7 +17,11 @@ class Products extends Component {
   }
 
   getProducts = async () => {
-    const res = await axios.get(`/api/products`);
+    const host = window.location.protocol + "//" + window.location.hostname;
+    const res = await axios({
+      method: "get",
+      url: `${host}:5000/api/products`,
+    });
     const products = res.data;
     this.setState({ products });
   };
