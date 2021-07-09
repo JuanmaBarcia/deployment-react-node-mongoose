@@ -13,13 +13,7 @@ class AddProduct extends Component {
       image: e.target.elements.image.value,
     };
 
-    const host = window.location.protocol + "//" + window.location.hostname;
-
-    await axios({
-      method: "post",
-      url: `${host}:5000/api/products`,
-      data: product,
-    });
+    await axios.post("/api/products", product);
   };
 
   render() {

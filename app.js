@@ -1,11 +1,14 @@
 const express = require("express");
-// require("dotenv").config();
+const path = require("path");
+require("dotenv").config();
 var cors = require("cors");
 
 const routerApi = require("./routes/products");
 require("./utils/db"); // Lanza la BBDD mongoose
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "client/build")));
 const port = process.env.PORT || 5000;
 
 app.use(cors());
@@ -18,6 +21,10 @@ app.use(express.json());
 //http://localhost:3000/api/products
 //http://localhost:3000/api/products?id=2
 app.use("/api", routerApi); // rutas para API
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 const server = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -12,16 +12,10 @@ class Products extends Component {
 
   componentDidMount() {
     this.getProducts();
-    console.log(process.env.PORT);
-    console.log(process.env.HOST);
   }
 
   getProducts = async () => {
-    const host = window.location.protocol + "//" + window.location.hostname;
-    const res = await axios({
-      method: "get",
-      url: `${host}:5000/api/products`,
-    });
+    const res = await axios.get("/api/products");
     const products = res.data;
     this.setState({ products });
   };
